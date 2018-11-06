@@ -25,10 +25,10 @@ public class Bot extends TelegramLongPollingBot {
         public void send(MessageInfo messageInfo){
             try {
                 switch (messageInfo.getMessageType()) {
-                    case "sndmsdg":
+                    case "sndmsg":
                         sendMessage((SendMessage) messageInfo.getSendObj());
                         break;
-                    case "sndaudion":
+                    case "sndaudio":
                         sendAudio((SendAudio) messageInfo.getSendObj());
                         break;
                 }
