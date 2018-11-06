@@ -22,17 +22,19 @@ public class Bot extends TelegramLongPollingBot {
 
 
     public class Sender {
-        public void SendAudio(MessageInfo messageInfo) {
+        public void send(MessageInfo messageInfo){
             try {
-                sendAudio((SendAudio) messageInfo.getSendObj());
-            } catch (Exception ex) {
+                switch (messageInfo.getMessageType()) {
+                    case "sndmsdg":
+                        sendMessage((SendMessage) messageInfo.getSendObj());
+                        break;
+                    case "sndaudion":
+                        sendAudio((SendAudio) messageInfo.getSendObj());
+                        break;
+                }
             }
-        }
-
-        public void SendText(MessageInfo messageInfo) {
-            try {
-                sendMessage((SendMessage) messageInfo.getSendObj());
-            } catch (Exception ex) {
+            catch (Exception ex){
+                ex.printStackTrace();
             }
         }
     }

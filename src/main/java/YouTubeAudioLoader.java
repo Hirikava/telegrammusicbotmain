@@ -35,7 +35,6 @@ public class YouTubeAudioLoader implements IAudioLoader {
     downloadButton.click();
     waitForDownload();
     driver.quit();
-
     return this.getLastModifiedFile();
   }
 
