@@ -33,13 +33,13 @@ public class YouTubeAudioLoader implements IAudioLoader {
         .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div[class$='ready']")));
     WebElement downloadButton = driver.findElement(By.cssSelector("li.media-parent"));
     downloadButton.click();
-    waitForDowload();
+    waitForDownload();
     driver.quit();
 
     return this.getLastModifiedFile();
   }
 
-  private void waitForDowload() {
+  private void waitForDownload() {
     try { // FIX FIX FIX
       TimeUnit.SECONDS.sleep(30);
     } catch (Exception e) {
