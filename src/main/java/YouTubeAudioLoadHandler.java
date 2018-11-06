@@ -13,6 +13,7 @@ public class YouTubeAudioLoadHandler extends RunableHandler {
 
     sendAudio.setChatId(requestInfo.getMessage().getChatId());
     MessageInfo messageInfo = new MessageInfo("sndaudio", sendAudio);
-    requestInfo.getBot().getSender().SendAudio(messageInfo);
+    requestInfo.getBot().getSender().send(
+            messageInfo);
   }
 }
