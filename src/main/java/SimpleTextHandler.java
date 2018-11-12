@@ -13,7 +13,7 @@ public class SimpleTextHandler implements IHandler {
     sendMessage.setText(answer);
     sendMessage.setChatId(requestInfo.getMessage().getChatId());
     MessageInfo messageInfo = new MessageInfo("sndmsg", sendMessage);
-    requestInfo.getBot().getSender().send(messageInfo);
+    requestInfo.getBot().send(messageInfo);
   }
 
 }

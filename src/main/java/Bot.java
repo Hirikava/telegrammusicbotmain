@@ -1,3 +1,4 @@
+import javax.inject.Inject;
 import org.telegram.telegrambots.ApiContextInitializer;
 import org.telegram.telegrambots.TelegramBotsApi;
 import org.telegram.telegrambots.api.methods.send.SendAudio;
@@ -10,54 +11,55 @@ import org.telegram.telegrambots.exceptions.TelegramApiException;
 
 public class Bot extends TelegramLongPollingBot {
 
-    public static void main(String[] args) {
-        ApiContextInitializer.init();
-        TelegramBotsApi telegramBotsApi = new TelegramBotsApi();
-        try {
-            telegramBotsApi.registerBot(new Bot());
-        } catch (TelegramApiException e) {
-            e.printStackTrace();
-        }
+  public static void main(String[] args) {
+    ApiContextInitializer.init();
+    TelegramBotsApi telegramBotsApi = new TelegramBotsApi();
+    try {
+      telegramBotsApi.registerBot(new Bot());
+    } catch (TelegramApiException e) {
+      e.printStackTrace();
     }
+  }
 
 
-    public class Sender {
-        public void send(MessageInfo messageInfo){
-            try {
-                switch (messageInfo.getMessageType()) {
-                    case "sndmsg":
-                        sendMessage((SendMessage) messageInfo.getSendObj());
-                        break;
-                    case "sndaudio":
-                        sendAudio((SendAudio) messageInfo.getSendObj());
-                        break;
-                }
-            }
-            catch (Exception ex){
-                ex.printStackTrace();
-            }
-        }
+  public void send(MessageInfo messageInfo) {
+    try {
+      switch (messageInfo.getMessageType()) {
+        case "sndmsg":
+          sendMessage((SendMessage) messageInfo.getSendObj());
+          break;
+        case "sndaudio":
+          sendAudio((SendAudio) messageInfo.getSendObj());
+          break;
+      }
+    } catch (Exception ex) {
+      ex.printStackTrace();
     }
+  }
 
-    public Sender getSender() {
-        return new Sender();
-    }
 
-    @Override
-    public void onUpdateReceived(Update update) {
-        Message message = update.getMessage();
-        PreParser parser = new PreParser();
-        RequestInfo requestInfo = parser.parse(message);
-        requestInfo.setBot(this);
-        IHandler handler = HandlerManager.getInstance().getHandler(requestInfo);
-        handler.handle(requestInfo);
-    }
+  private PreParser preParser;
 
-    public String getBotUsername() {
-        return "SonaMusicBot";
-    }
+  public Bot(@Inject PreParser preParser) {
+    this.preParser = preParser;
+  }
 
-    public String getBotToken() {
-        return "779766656:AAFf6t0tm9FhK6KaKfBn1QYR6o5OVJuhblY";
-    }
+  @Override
+  public void onUpdateReceived(Update update) {
+    Message message = update.getMessage();
+//    PreParser parser = new PreParser();
+    RequestInfo requestInfo = parser.parse(message);
+    requestInfo.setBot(this);
+    IHandler handler = HandlerManager.getInstance().getHandler(requestInfo);
+    handler.handle(requestInfo);
+  }
+
+  public String getBotUsername() {
+    return "SonaMusicBot";
+  }
+
+  public String getBotToken() {
+    return "779766656:AAFf6t0tm9FhK6KaKfBn1QYR6o5OVJuhblY";
+  }
 }
+

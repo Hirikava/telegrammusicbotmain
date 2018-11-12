@@ -6,19 +6,19 @@ public class LinkTests {
 
     private Link link;
     @Before
-    public void SetUp(){
+    public void setUp(){
         link = new Link();
     }
     @Test
-    public void LinkGoesWithEanglishRequest() {
+    public void linkGoesWithEanglishRequest() {
         Assert.assertEquals("https://www.youtube.com/watch?v=Cwkej79U3ek",link.searchLink("a thousand miles"));
     }
     @Test
-    public void LinkGoesWithRussianRequest() {
+    public void linkGoesWithRussianRequest() {
         Assert.assertEquals("https://www.youtube.com/watch?v=QiFBgtgUtfw", link.searchLink("три полоски"));
     }
     @Test
-    public void LinkGoesWithWierdChinesSymbolsWTF(){
+    public void linkGoesWithWierdChinesSymbolsWTF(){
         Assert.assertEquals("https://www.youtube.com/watch?v=_ytjjhOYgOU", link.searchLink("Mermaid girl-秋葉工房 MIX"));
     }
 }

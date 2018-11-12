@@ -50,7 +50,7 @@ public class YouTubeAudioLoader implements IAudioLoader {
   private String directoryPath;
 
   private WebDriver browserSetup() {
-    System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromedriver.exe");
+    System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromedriver");
     HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
     chromePrefs.put("download.default_directory", directoryPath);
     chromePrefs.put("profile.default_content_settings.popups", 0);
