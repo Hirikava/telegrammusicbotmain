@@ -4,8 +4,6 @@ import org.telegram.telegrambots.api.objects.Message;
 
 public class YouTubeAudioLoadHandlerTest {
 
-
-
     @Test
     public void youTubeAudioLoadHandlerRunsInTwoThreads()
     {
@@ -15,5 +13,4 @@ public class YouTubeAudioLoadHandlerTest {
 
 
     }
-
 }

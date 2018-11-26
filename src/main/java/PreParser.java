@@ -1,6 +1,5 @@
 import org.telegram.telegrambots.api.objects.Message;
 
-@MyAwesomeAnnotation
 public class PreParser {
 
   public PreParser() {

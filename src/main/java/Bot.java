@@ -37,17 +37,10 @@ public class Bot extends TelegramLongPollingBot {
     }
   }
 
-
-  private PreParser preParser;
-
-  public Bot(@Inject PreParser preParser) {
-    this.preParser = preParser;
-  }
-
   @Override
   public void onUpdateReceived(Update update) {
     Message message = update.getMessage();
-//    PreParser parser = new PreParser();
+    PreParser parser = new PreParser();
     RequestInfo requestInfo = parser.parse(message);
     requestInfo.setBot(this);
     IHandler handler = HandlerManager.getInstance().getHandler(requestInfo);

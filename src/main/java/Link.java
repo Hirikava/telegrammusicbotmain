@@ -13,13 +13,13 @@ public class Link {
     return result;
   }
 
-  private String getVideoId(String link) {
+  public static String getVideoId(String link) {
     try {
       URL site = new URL(link);
       BufferedReader reader = new BufferedReader(new InputStreamReader(site.openStream()));
       String line;
       while ((line = reader.readLine()) != null) {
-        if (line.startsWith("<li><div class=\"yt-lockup")) {
+        if (line.startsWith("<li><div class=")) {
           String[] wordArr = line.split(" ");
           for (String word : wordArr) {
             if (word.startsWith("href=")) {
