@@ -4,28 +4,31 @@ import java.io.InputStreamReader;
 import java.net.URL;
 
 public class Link {
-
   public String searchLink(String str) {
     String youtubeLinkForSearching = "https://www.youtube.com/results?search_query=";
     String youtubeSearchingResultLink = youtubeLinkForSearching + str.replaceAll(" ", "+");
-    String youtubeLink = "https://www.youtube.com";
-    String result = youtubeLink + getVideoId(youtubeSearchingResultLink);
+    String result = getVideoLinks(youtubeSearchingResultLink, 1)[0];
     return result;
   }
 
-  public static String getVideoId(String link) {
+  public static String[] getVideoLinks(String link, int count) {
+    String[] links = new String[count];
+    int currentIndex = 0;
+    String youtubeLink = "https://www.youtube.com";
     try {
       URL site = new URL(link);
       BufferedReader reader = new BufferedReader(new InputStreamReader(site.openStream()));
       String line;
-      while ((line = reader.readLine()) != null) {
+      while ((line = reader.readLine()) != null && currentIndex < count) {
         if (line.startsWith("<li><div class=")) {
           String[] wordArr = line.split(" ");
           for (String word : wordArr) {
             if (word.startsWith("href=")) {
               int begin = word.indexOf('"') + 1;
               int end = word.lastIndexOf('"');
-              return word.substring(begin, end);
+              links[currentIndex] = youtubeLink + word.substring(begin, end);
+              currentIndex++;
+              break;
             }
           }
         }
@@ -33,6 +36,6 @@ public class Link {
     } catch (IOException e) {
       e.printStackTrace();
     }
-    return null;
+    return links;
   }
 }
