@@ -1,14 +1,14 @@
-import java.util.HashMap;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Map;
 import org.quartz.*;
+import  org.telegram.telegrambots.api.methods.send.SendMessage;
 
 public class Messenger implements Job {
 
-  private static int maxLinks = 5;
-  private static Map<String, String[]> chanels;
-  private static String[] news = new String[maxLinks];
-  private static String[] music = new String[maxLinks];
-  private static String[] sport = new String[maxLinks];
+  private Map<String, String> chanels;
+  private String dataFile = "file_name";
 
   private String newsLink = "PL3ZQ5CpNulQkRwPTcR7hYosBYLhjLQk9h";
   private String musicLink = "PLFgquLnL59anbRi80QEZdeALImKQzNnOl";
@@ -22,16 +22,28 @@ public class Messenger implements Job {
   }
 
   private void updateLinks() {
-    String[] freshNews = Link.getVideoLinks(commonLink+newsLink, maxLinks);
-    String[] freshMusic = Link.getVideoLinks(commonLink+musicLink, maxLinks);
-    String[] freshSport = Link.getVideoLinks(commonLink+sportLink, maxLinks);
+    chanels.put("news", Link.getVideoLinks(commonLink+newsLink, 1)[0]);
+    chanels.put("music", Link.getVideoLinks(commonLink+musicLink, 1)[0]);
+    chanels.put("sport", Link.getVideoLinks(commonLink+sportLink, 1)[0]);
   }
 
   private void sendFresh() {
-
-  }
-
-  private boolean isFresh(String link) {
-    return true;
+    try {
+      BufferedReader reader = new BufferedReader(new FileReader(dataFile));
+      String line;
+      while ((line = reader.readLine()) != null) {
+        String[] arr = line.split(" ");
+        String chatId = arr[0];
+        for (int i = 1; i < arr.length; i++) {
+          SendMessage sender = new SendMessage();
+          sender.setChatId(chatId);
+          String text = chanels.get(arr[i]);
+          sender.setText(text);
+          execute((SendMessage));
+        }
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 }
