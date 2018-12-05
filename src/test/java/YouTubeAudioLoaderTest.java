@@ -1,3 +1,4 @@
+import Common.YouTubeAudioLoader;
 import org.junit.Assert;
 import org.junit.Test;
 

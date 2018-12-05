@@ -1,4 +1,4 @@
-
+package Infrastructure;
 
 public class MessageInfo {
 

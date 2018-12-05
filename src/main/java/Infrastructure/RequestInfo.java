@@ -1,8 +1,10 @@
+package Infrastructure;
+
+import Common.Bot;
 import org.telegram.telegrambots.api.objects.Message;
 
 import java.util.Dictionary;
 import java.util.Hashtable;
-import java.util.List;
 
 public class RequestInfo {
 

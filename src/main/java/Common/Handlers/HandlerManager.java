@@ -1,3 +1,8 @@
+package Common.Handlers;
+
+import Infrastructure.IHandler;
+import Infrastructure.RequestInfo;
+
 import java.util.Dictionary;
 import java.util.Hashtable;
 
@@ -10,6 +15,7 @@ public class HandlerManager {
         handlerFactory = new HandlerFactory();
         stringIHandlerDictionary = new Hashtable<>();
         addNewHandler("/play", YouTubeAudioLoadHandler.class.getName());
+        addNewHandler("/sub", SubscriveHandler.class.getName());
     }
 
     public static HandlerManager getInstance() {

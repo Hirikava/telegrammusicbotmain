@@ -1,3 +1,7 @@
+package Common.Handlers;
+
+import Infrastructure.IHandler;
+import Infrastructure.RequestInfo;
 
 abstract public class RunableHandler implements Runnable, IHandler {
 

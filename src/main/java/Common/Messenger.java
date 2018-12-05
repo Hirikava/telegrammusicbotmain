@@ -1,3 +1,5 @@
+package Common;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -39,7 +41,6 @@ public class Messenger implements Job {
           sender.setChatId(chatId);
           String text = chanels.get(arr[i]);
           sender.setText(text);
-          execute((SendMessage));
         }
       }
     } catch (IOException e) {

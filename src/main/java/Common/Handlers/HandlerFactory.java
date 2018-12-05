@@ -1,4 +1,6 @@
-import org.aopalliance.reflect.Class;
+package Common.Handlers;
+
+import Infrastructure.IHandler;
 
 public class HandlerFactory {
 
@@ -6,8 +8,12 @@ public class HandlerFactory {
     if(type == null)
       return new SimpleTextHandler("Command not found :(");
     switch (type) {
-        case "YouTubeAudioLoadHandler":
+        case "Common.Handlers.YouTubeAudioLoadHandler": {
             return new YouTubeAudioLoadHandler();
+        }
+        case  "Common.Handlers.SubscriveHandler":{
+            return new SubscriveHandler();
+        }
         default:
             return new SimpleTextHandler("Command not found :(");
     }

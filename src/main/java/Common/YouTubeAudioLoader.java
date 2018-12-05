@@ -1,3 +1,6 @@
+package Common;
+
+import Infrastructure.IAudioLoader;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,6 +20,12 @@ public class YouTubeAudioLoader implements IAudioLoader {
     directoryToLoad = new File(directory);
     directoryPath = directory;
     directoryToLoad.mkdir();
+    if(System.getProperty("os.name").startsWith("Windows"))
+        driverFile = System.getProperty("user.dir") + "\\" + String.join("\\",
+                "src","main","resources","drivers","chromedriver.exe");
+    else
+        driverFile = System.getProperty("user.dir") + "/" + String.join("/",
+                "src","main","resources","drivers","chromedriver");
   }
 
   public File download(String link) {
@@ -48,9 +57,10 @@ public class YouTubeAudioLoader implements IAudioLoader {
 
   private File directoryToLoad;
   private String directoryPath;
+  private String driverFile;
 
   private WebDriver browserSetup() {
-    System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromedriver");
+    System.setProperty("webdriver.chrome.driver", driverFile);
     HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
     chromePrefs.put("download.default_directory", directoryPath);
     chromePrefs.put("profile.default_content_settings.popups", 0);

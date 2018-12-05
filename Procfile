@@ -1,1 +1,1 @@
-web: javac src/main/java/Bot.java
+web: javac src/main/java/Common.Bot.java

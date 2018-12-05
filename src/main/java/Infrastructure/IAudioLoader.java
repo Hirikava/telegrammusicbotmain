@@ -1,3 +1,5 @@
+package Infrastructure;
+
 import java.io.File;
 
 public interface IAudioLoader {

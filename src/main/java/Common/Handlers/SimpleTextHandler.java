@@ -1,3 +1,8 @@
+package Common.Handlers;
+
+import Infrastructure.IHandler;
+import Infrastructure.MessageInfo;
+import Infrastructure.RequestInfo;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 
 public class SimpleTextHandler implements IHandler {

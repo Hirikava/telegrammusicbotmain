@@ -1,3 +1,6 @@
+package Common;
+
+import Infrastructure.RequestInfo;
 import org.telegram.telegrambots.api.objects.Message;
 
 public class PreParser {

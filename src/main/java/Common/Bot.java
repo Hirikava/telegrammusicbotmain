@@ -1,4 +1,9 @@
-import javax.inject.Inject;
+package Common;
+
+import Common.Handlers.HandlerManager;
+import Infrastructure.IHandler;
+import Infrastructure.MessageInfo;
+import Infrastructure.RequestInfo;
 import org.telegram.telegrambots.ApiContextInitializer;
 import org.telegram.telegrambots.TelegramBotsApi;
 import org.telegram.telegrambots.api.methods.send.SendAudio;
@@ -8,11 +13,15 @@ import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
 
+import java.io.IOException;
+
 
 public class Bot extends TelegramLongPollingBot {
 
   public static void main(String[] args) {
     ApiContextInitializer.init();
+
+
     TelegramBotsApi telegramBotsApi = new TelegramBotsApi();
     try {
       telegramBotsApi.registerBot(new Bot());

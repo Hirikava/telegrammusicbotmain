@@ -13,7 +13,7 @@
 2. Отправку пользователю сделать синхронной (handle заканчивается после отправки)
 3. Вынести класс сендер и хранить в нём экземпляр бота. Реализовать ISender.
 4. Вывод stackTrace-ов для всех исключений
-5. Отвязать RunableHandler от YouTubeAudioLoadHandler
+5. Отвязать Common.Handlers.RunableHandler от Common.Handlers.YouTubeAudioLoadHandler
 6. Декомпозировать YouTubeVideoLoader.
 
 
