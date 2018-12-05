@@ -1,5 +1,3 @@
-package Common;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -9,22 +7,36 @@ import  org.telegram.telegrambots.api.methods.send.SendMessage;
 
 public class Messenger implements Job {
 
-  private Map<String, String> chanels;
-  private String dataFile = "file_name";
-
   private String newsLink = "PL3ZQ5CpNulQkRwPTcR7hYosBYLhjLQk9h";
   private String musicLink = "PLFgquLnL59anbRi80QEZdeALImKQzNnOl";
   private String sportLink = "PL4Yp_5ExVAU3ielii5p56JYladaORKMmk";
   private String commonLink = "https://www.youtube.com/playlist?list=";
+  private static Map<String, String> chanels;
+  private Map<String, String> themes;
+  private String dataFile = "file_name";
+
 
   @Override
   public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
+    System.out.println("Time for mailing");
     updateLinks();
-    sendFresh();
+    for (String chanel: chanels.keySet()) {
+      System.out.println(chanels.get(chanel));
+    }
+    //sendFresh();
+  }
+
+  public Messenger() {
+    themes.put("news", newsLink);
+    themes.put("music", musicLink);
+    themes.put("sport", sportLink);
   }
 
   private void updateLinks() {
-    chanels.put("news", Link.getVideoLinks(commonLink+newsLink, 1)[0]);
+    for (String theme: themes.keySet()) {
+      chanels.put(theme, Link.getVideoLinks(commonLink+newsLink, 1)[0]);
+
+    }
     chanels.put("music", Link.getVideoLinks(commonLink+musicLink, 1)[0]);
     chanels.put("sport", Link.getVideoLinks(commonLink+sportLink, 1)[0]);
   }
@@ -41,6 +53,7 @@ public class Messenger implements Job {
           sender.setChatId(chatId);
           String text = chanels.get(arr[i]);
           sender.setText(text);
+          System.out.println("It's work!");
         }
       }
     } catch (IOException e) {

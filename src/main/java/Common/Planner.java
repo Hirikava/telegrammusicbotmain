@@ -13,30 +13,27 @@ import org.quartz.impl.StdSchedulerFactory;
 
 public class Planner {
 
-  public static void main(String[] args) {
+  public static void task() {
     try {
       // Grab the Scheduler instance from the Factory
       Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
 
       // and start it off
-      scheduler.start();
       // define the job and tie it to our HelloJob class
       JobDetail job = newJob(Messenger.class)
           .withIdentity("job1", "group1")
           .build();
-
-      // Trigger the job to run now, and then repeat every 40 seconds
       Trigger trigger = newTrigger()
           .withIdentity("trigger1", "group1")
           .startNow()
           .withSchedule(simpleSchedule()
-              .withIntervalInHours(24)
+              .withIntervalInSeconds(4)
               .repeatForever())
           .build();
 
       // Tell quartz to schedule the job using our trigger
       scheduler.scheduleJob(job, trigger);
-      scheduler.shutdown();
+      scheduler.start();
 
     } catch (SchedulerException se) {
       se.printStackTrace();
