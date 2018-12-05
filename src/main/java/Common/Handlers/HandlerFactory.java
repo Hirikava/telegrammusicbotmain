@@ -12,7 +12,7 @@ public class HandlerFactory {
             return new YouTubeAudioLoadHandler();
         }
         case  "Common.Handlers.SubscriveHandler":{
-            return new SubscriveHandler();
+            return new SubscribeHandler();
         }
         default:
             return new SimpleTextHandler("Command not found :(");

@@ -1,13 +1,13 @@
 package Common;
-import Infrastructure.ISubscribtionManager;
-import javafx.util.Pair;
+import Infrastructure.ISubscriptionManager;
+import java.util.List;
+import org.glassfish.grizzly.utils.Pair;
 import org.sqlite.SQLiteDataSource;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.sql.*;
 
-public class SubscriptionManager implements ISubscribtionManager {
+public class SubscriptionManager implements ISubscriptionManager {
 
     private String url;
     public static SubscriptionManager ourInstance = new SubscriptionManager();
@@ -29,7 +29,7 @@ public class SubscriptionManager implements ISubscribtionManager {
     }
 
     @Override
-    public void setSubscruption(Long chatID, String subscriprion) {
+    public void setSubscription(Long chatID, String subscriprion) {
         try {
             SQLiteDataSource sqLiteDataSource = new SQLiteDataSource();
             sqLiteDataSource.setUrl(url);
@@ -46,7 +46,7 @@ public class SubscriptionManager implements ISubscribtionManager {
     }
 
     @Override
-    public List<Pair<Long, String>> getSubscribtions() {
+    public List<Pair<Long, String>> getSubscriptions() {
         List<Pair<Long,String>> retList = new ArrayList<>();
         try {
             SQLiteDataSource sqLiteDataSource = new SQLiteDataSource();

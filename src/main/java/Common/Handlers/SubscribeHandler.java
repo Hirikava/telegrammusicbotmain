@@ -3,11 +3,11 @@ import Common.SubscriptionManager;
 import  Infrastructure.IHandler;
 import Infrastructure.RequestInfo;
 
-public class SubscriveHandler implements IHandler{
+public class SubscribeHandler implements IHandler{
     @Override
     public void handle(RequestInfo requestInfo) {
         String request = requestInfo.getMessage().getText().split(" ")[1];
-        SubscriptionManager.ourInstance.setSubscruption(requestInfo.getMessage().getChatId(),request);
-        new SimpleTextHandler("You sucsessfule subscibed on:" + request).handle(requestInfo);
+        SubscriptionManager.ourInstance.setSubscription(requestInfo.getMessage().getChatId(),request);
+        new SimpleTextHandler("You successfull subscribed on:" + request).handle(requestInfo);
     }
 }

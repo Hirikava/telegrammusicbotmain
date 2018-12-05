@@ -9,11 +9,11 @@ public class Link {
   public String searchLink(String str) {
     String youtubeLinkForSearching = "https://www.youtube.com/results?search_query=";
     String youtubeSearchingResultLink = youtubeLinkForSearching + str.replaceAll(" ", "+");
-    String result = getVideoLinks(youtubeSearchingResultLink, 1)[0];
+    String result = getVideoLinks(youtubeSearchingResultLink,"<li><div class=",  1)[0];
     return result;
   }
 
-  public static String[] getVideoLinks(String link, int count) {
+  public static String[] getVideoLinks(String link, String key, int count) {
     String[] links = new String[count];
     int currentIndex = 0;
     String youtubeLink = "https://www.youtube.com";
@@ -22,7 +22,7 @@ public class Link {
       BufferedReader reader = new BufferedReader(new InputStreamReader(site.openStream()));
       String line;
       while ((line = reader.readLine()) != null && currentIndex < count) {
-        if (line.startsWith("<li><div class=")) {
+        if (line.startsWith(key)) {
           String[] wordArr = line.split(" ");
           for (String word : wordArr) {
             if (word.startsWith("href=")) {
