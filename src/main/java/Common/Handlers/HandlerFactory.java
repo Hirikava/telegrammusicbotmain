@@ -11,7 +11,7 @@ public class HandlerFactory {
         case "Common.Handlers.YouTubeAudioLoadHandler": {
             return new YouTubeAudioLoadHandler();
         }
-        case  "Common.Handlers.SubscriveHandler":{
+        case  "Common.Handlers.SubscribeHandler":{
             return new SubscribeHandler();
         }
         default:

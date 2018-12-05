@@ -16,14 +16,17 @@ import org.telegram.telegrambots.exceptions.TelegramApiException;
 import java.io.IOException;
 
 
-public class Bot extends TelegramLongPollingBot {
 
+public class Bot extends TelegramLongPollingBot {
   public static void main(String[] args) {
     ApiContextInitializer.init();
+
     Planner planner = new Planner();
     Thread plannerThread = new Thread(() -> planner.task());
     TelegramBotsApi telegramBotsApi = new TelegramBotsApi();
     try {
+      Bot requesterBot = new Bot();
+      Messenger.Init(requesterBot);
       telegramBotsApi.registerBot(new Bot());
     } catch (TelegramApiException e) {
       e.printStackTrace();

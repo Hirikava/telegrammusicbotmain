@@ -3,11 +3,20 @@ package Common;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import Infrastructure.MessageInfo;
 import org.glassfish.grizzly.utils.Pair;
 import org.quartz.*;
+import org.telegram.telegrambots.api.methods.send.SendMessage;
 
 public class Messenger implements Job {
 
+    private static Bot _bot;
+
+    public static void Init(Bot bot)
+    {
+        _bot = bot;
+    }
   @Override
   public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
     Map<String, String> chanels = new HashMap<String, String>();
@@ -26,7 +35,11 @@ public class Messenger implements Job {
   }
 
   private void snd(Long id, String text) {
-
+      SendMessage sendMessage = new SendMessage();
+      sendMessage.setChatId(id);
+      sendMessage.setText(text);
+      MessageInfo messageInfo = new MessageInfo("sndmsg", sendMessage);
+      this._bot.send(messageInfo);
   }
 
 }

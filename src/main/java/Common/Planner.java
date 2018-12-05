@@ -19,11 +19,12 @@ public class Planner {
           .withIdentity("job1", "group1")
           .build();
 
+
       Trigger trigger = newTrigger()
           .withIdentity("trigger1", "group1")
           .startNow()
           .withSchedule(simpleSchedule()
-              .withIntervalInSeconds(15)
+              .withIntervalInSeconds(60)
               .repeatForever())
           .build();
 
