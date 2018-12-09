@@ -24,7 +24,7 @@ public class Planner {
           .withIdentity("trigger1", "group1")
           .startNow()
           .withSchedule(simpleSchedule()
-              .withIntervalInSeconds(60)
+              .withIntervalInHours(1)
               .repeatForever())
           .build();
 
