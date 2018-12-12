@@ -44,6 +44,21 @@ public class SubscriptionManager implements ISubscriptionManager {
         }
     }
 
+    public void resolveSubsription(Long chatID, String subscription)
+    {
+        try {
+            SQLiteDataSource sqLiteDataSource = new SQLiteDataSource();
+            sqLiteDataSource.setUrl(url);
+            Connection connection = sqLiteDataSource.getConnection();
+            Statement statement = connection.createStatement();
+            boolean res = statement.execute("DELETE FROM SUBSCRIPTIONS WHERE CHATID=" + chatID + " AND SUB=" + "\'" + subscription + "\'" );
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public List<Pair<Long, String>> getSubscriptions() {
         List<Pair<Long,String>> retList = new ArrayList<>();
@@ -64,4 +79,26 @@ public class SubscriptionManager implements ISubscriptionManager {
         }
         return retList;
     }
+
+    public List<String> selectSubscriptions(Long chatID)
+    {
+        List<String> retList = new ArrayList<>();
+        try {
+            SQLiteDataSource sqLiteDataSource = new SQLiteDataSource();
+            sqLiteDataSource.setUrl(url);
+            Connection connection = sqLiteDataSource.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM SUBSCRIPTIONS WHERE CHATID=" + chatID+";");
+            while(resultSet.next())
+            {
+                retList.add(resultSet.getString("SUB"));
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return retList;
+    }
+
 }

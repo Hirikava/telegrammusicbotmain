@@ -16,6 +16,8 @@ public class HandlerManager {
         stringIHandlerDictionary = new Hashtable<>();
         addNewHandler("/play", YouTubeAudioLoadHandler.class.getName());
         addNewHandler("/sub", SubscribeHandler.class.getName());
+        addNewHandler("/unsub", UnsubHandler.class.getName());
+        addNewHandler("/subs", GetSubsHandler.class.getName());
     }
 
     public static HandlerManager getInstance() {

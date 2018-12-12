@@ -14,6 +14,12 @@ public class HandlerFactory {
         case  "Common.Handlers.SubscribeHandler":{
             return new SubscribeHandler();
         }
+        case  "Common.Handlers.UnsubHandler":{
+            return new UnsubHandler();
+        }
+        case  "Common.Handlers.GetSubsHandler":{
+            return new GetSubsHandler();
+        }
         default:
             return new SimpleTextHandler("Command not found :(");
     }
